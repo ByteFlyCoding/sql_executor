@@ -7,19 +7,22 @@ import (
 )
 
 const (
-	SUCCESSQUERY = iota
-	FAILQUERY
-	SUCCESSMODIFY
-	FAILMODIFY
-	FAILMODIFYEXIST
+	SUCCESSQUERY    = iota // 查询接口执行任务成功
+	FAILQUERY              // 查询接口执行任务失败
+	SUCCESSMODIFY          // 修改接口执行任务成功
+	FAILMODIFYEXIST        // 修改接口存在运行异常的子任务
+	PARAMETERERROR         // 传入参数存在异常
 )
 
-type ReturnQueryErrorJson struct {
-	Code   int    `json:"code"`
-	ErrMsg string `json:"err_msg"`
+// QueryErrorJson 用于序列化查询接口异常信息
+type QueryErrorJson struct {
+	Code   int    `json:"code"` // 业务状态码
+	Sql    string `json:"sql"`
+	ErrMsg string `json:"err_msg"` // 异常信息
 }
 
-func ReturnQueryError(code int, err interface{}) *ReturnQueryErrorJson {
+// ReturnQueryError 返回查询接口执行任务异常信息
+func ReturnQueryError(code int, sql string, err interface{}) *QueryErrorJson {
 
 	var msg string
 	switch err.(type) {
@@ -29,29 +32,31 @@ func ReturnQueryError(code int, err interface{}) *ReturnQueryErrorJson {
 		msg = fmt.Sprintf("%s", err)
 	}
 
-	jsonData := ReturnQueryErrorJson{Code: code, ErrMsg: msg}
+	jsonData := QueryErrorJson{Code: code, Sql: sql, ErrMsg: msg}
 
 	return &jsonData
 }
 
-type ReturnQuerySuccessJson struct {
-	Code  int          `json:"code"`
-	Sql   string       `json:"sql"`
-	Count int64        `json:"count"`
-	Items []orm.Params `json:"items"`
-	Retry int          `json:"retry"`
-	Msg   string       `json:"msg"`
+// QuerySuccessJson 用于序列化查询接口任务执行成功信息
+type QuerySuccessJson struct {
+	Code   int          `json:"code"`            // 业务状态码
+	Sql    string       `json:"sql"`             // SQL语句
+	Count  int64        `json:"count"`           // 查询结果记录数
+	Items  []orm.Params `json:"items,omitempty"` // 查询结果，以列表形式存储
+	Retry  int          `json:"retry"`           // 重试次数
+	ErrMsg string       `json:"err_msg"`         // 查询成功消息
 }
 
-func ReturnQuerySuccess(sql string, msg string, items []orm.Params, count int64, retry int) *ReturnQuerySuccessJson {
+// ReturnQuerySuccess 返回查询接口执行任务成功信息
+func ReturnQuerySuccess(sql string, msg string, items []orm.Params, count int64, retry int) *QuerySuccessJson {
 
-	jsonData := ReturnQuerySuccessJson{
-		Code:  SUCCESSQUERY,
-		Sql:   sql,
-		Count: count,
-		Items: items,
-		Retry: retry,
-		Msg:   msg,
+	jsonData := QuerySuccessJson{
+		Code:   SUCCESSQUERY,
+		Sql:    sql,
+		Count:  count,
+		Items:  items,
+		Retry:  retry,
+		ErrMsg: msg,
 	}
 
 	return &jsonData

@@ -34,14 +34,14 @@
 
 返回参数:
 
-| 字段  | 说明          | 类型     | 备注    | 是否必填 |
-|-----|-------------|--------|-------|------|
-| code | 业务状态码       | Number |       | 是    |
-| count | 返回的查询结果记录数  | Number |       | 是    |
-| sql | 查询语句        | string |       | 是    |
-| items | 查询结果        | Array  |       | 否    |
-| retry | 允许重试的次数     | Number |  | 是    |
-| msg | 异常或者成功的消息   | string |       | 是    |
+| 字段      | 说明          | 类型     | 备注    | 是否必填 |
+|---------|-------------|--------|-------|------|
+| code    | 业务状态码       | Number |       | 是    |
+| count   | 返回的查询结果记录数  | Number |       | 是    |
+| sql     | 查询语句        | string |       | 是    |
+| items   | 查询结果        | Array  |       | 否    |
+| retry   | 允许重试的次数     | Number |  | 是    |
+| err_msg | 异常或者成功的消息   | string |       | 是    |
 
 示例: [接口功能测试](./tests/function_test.md#查询接口测试用例)
 
@@ -54,28 +54,30 @@
 请求参数: 
 
 | 字段           | 说明                        | 类型     | 备注    | 是否必填 |
-|--------------|---------------------------|--------|---|------|
-| transactions | 存放事务，每个事务可包含多条sql语句       | Array  |   | 是    |
-| sqls         |                           | Array  |   | 否    |
-| id           | 用于给同一事务中的sql语句或给不同事务编号    | Number |   | 否    |
-| name         | 给sql或事务命名                 | String |   | 否    |
-| sql          | UPDATE、DELETE 或 INSERT 语句 | String |   | 是    |
+|--------------|---------------------------|--------|-------|------|
+| transactions | 存放事务，每个事务可包含多条sql语句       | Array  |       | 是    |
+| sqls         | 存放SQL信息列表                 | Array  |       | 是    |
+| id           | 用于给同一事务中的sql语句或给不同事务编号    | Number |       | 否    |
+| name         | 给sql或事务命名                 | String |       | 否    |
+| sql          | UPDATE、DELETE 或 INSERT 语句 | String |       | 是    |
+| timeout      | 执行事务的超时时间                 | Number | 以秒为单位 | 否    |
 
 
 返回参数:
 
-| 字段           | 说明                        | 类型     | 备注    | 是否必填 |
-|--------------|---------------------------|--------|---|------|
-| code  | 业务状态码        | Number |       | 是    |
-| items | 返回事务信息列表                  | Array  |   | 否    |
-| id           | 用于给同一事务中的sql语句或给不同事务编号    | Number |   | 否    |
-| sql_info     | 用于有语法错误的sql语句信息           | Array  |   |  否    |
-| sql          | UPDATE、DELETE 或 INSERT 语句 | String |   | 是    |
-| name         | 给sql或事务命名                 | String |   | 否    |
-| count        | 表示重试次数或修改语句作用生效的行数或       | Number |   | 是    |
-| retry | 允许重试的次数     | Number |  | 否    |
-| err_msg | 事务异常或者成功的消息   | string |       | 是    |
-| msg     | 用于描述所有事务的执行情况 | string |       | 否    | 
+| 字段       | 说明                        | 类型     | 备注    | 是否必填 |
+|----------|---------------------------|--------|-------|------|
+| code     | 业务状态码                     | Number |       | 是    |
+| items    | 返回事务信息列表                  | Array  |       | 否    |
+| id       | 用于给同一事务中的sql语句或给不同事务编号    | Number |       | 否    |
+| sql_info | 用于有语法错误的sql语句信息           | Array  |       | 否    |
+| sql      | UPDATE、DELETE 或 INSERT 语句 | String |       | 是    |
+| name     | 给sql或事务命名                 | String |       | 否    |
+| count    | 表示重试次数或修改语句作用生效的行数或       | Number |       | 是    |
+| retry    | 允许重试的次数                   | Number |       | 否    |
+| err_msg  | 事务异常或者成功的消息、用于描述所有事务的执行情况 | string |       | 是    |
+| msg      | 用于描述所有事务的执行情况             | string |       | 否    | 
+| timeout  | 执行事务的超时时间                 | Number | 以秒为单位 | 否    |
 
 示例: [接口功能测试](./tests/function_test.md#修改接口测试用例)
 
@@ -86,4 +88,3 @@
 用于开发过程中快速验证，详情内容请参照[接口功能测试](./tests/function_test.md)
 
 ### 单元测试
-

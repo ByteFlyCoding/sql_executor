@@ -7,6 +7,7 @@ import (
 	"sql_executor/models"
 )
 
+// RegisterRouter 注册路由
 func RegisterRouter(manager *life.Manager, model *models.Executor) {
 
 	executorCtl := &controllers.SqlExecutorController{

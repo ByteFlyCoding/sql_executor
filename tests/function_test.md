@@ -31,7 +31,7 @@ CREATE TABLE SQL_EXECUTOR.user
 1. 查询语句`select * from SQL_EXECUTOR.user`测试
 
 ```bash
-curl --location --request GET 'http://localhost:8080/sql_executor/query?sql=select%20%2A%20from%20SQL_EXECUTOR.user' \
+curl --location --request GET 'http://localhost:8080/sql_executor/query?sql=select%20%2A%20from%20SQL_EXECUTOR.user%20limit%2010' \
 --header 'User-Agent: Apifox/1.0.0 (https://apifox.com)' \
 --header 'Accept: */*' \
 --header 'Host: localhost:8080' \
@@ -39,11 +39,12 @@ curl --location --request GET 'http://localhost:8080/sql_executor/query?sql=sele
 ```
 
 返回结果：
+
 ```json
 {
   "code": 0,
-  "sql": "select * from SQL_EXECUTOR.user",
-  "count": 52,
+  "sql": "select * from SQL_EXECUTOR.user limit 10",
+  "count": 10,
   "items": [
     {
       "create_time": "2024-04-27 13:52:02",
@@ -134,388 +135,10 @@ curl --location --request GET 'http://localhost:8080/sql_executor/query?sql=sele
       "password": "qewqwer",
       "update_time": "2024-04-27 13:52:18",
       "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "13",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "14",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "15",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "16",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "17",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "18",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "19",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "20",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "21",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "22",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "23",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "24",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "25",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "26",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "27",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "28",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "29",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "30",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "31",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "32",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "33",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "34",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "35",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "36",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "37",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "38",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "39",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "40",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "41",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "42",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "43",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "44",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "45",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "46",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "47",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "48",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "49",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "50",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "51",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "52",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "53",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
-    },
-    {
-      "create_time": "2024-04-27 13:52:02",
-      "describe": "ewqreqwwer",
-      "email": null,
-      "id": "54",
-      "password": "qewqwer",
-      "update_time": "2024-04-27 13:52:18",
-      "user_name": "qwer"
     }
   ],
   "retry": 0,
-  "msg": "retryCount input is abnormal"
+  "err_msg": "retryCount input is abnormal"
 }
 ```
 
@@ -535,6 +158,7 @@ curl --location --request GET 'http://localhost:8080/sql_executor/query?sql=%20%
 ```json
 {
   "code": 1,
+  "sql": " * from SQL_EXECUTOR.task",
   "err_msg": "syntax error at position 3"
 }
 ```
@@ -577,21 +201,24 @@ curl --location --request POST 'http://localhost:8080/sql_executor/Modify' \
   "items": [
     {
       "id": 1,
+      "retry": 1,
       "count": 1,
       "name": "first",
-      "err_msg": "Transaction execute successfully",
-      "Sql_info": [
+      "err_msg": "事务提交成功",
+      "items": [
         {
           "id": 1,
           "name": "111",
           "sql": "INSERT INTO SQL_EXECUTOR.user (user_name, password, create_time, update_time, `describe`) VALUES ('qwer', 'qewqwer', '2024-04-27 13:52:02', '2024-04-27 13:52:18', 'ewqreqwwer')",
+          "err_msg": "该SQL执行成功，等待提交",
           "count": 1
         }
-      ]
+      ],
+      "timeout": 5
     }
   ],
   "count": 1,
-  "msg": ""
+  "err_msg": "所有都任务执行成功"
 }
 ```
 
@@ -636,27 +263,31 @@ curl --location --request POST 'http://localhost:8080/sql_executor/Modify' \
   "items": [
     {
       "id": 1,
+      "retry": 1,
       "count": 2,
       "name": "first",
-      "err_msg": "Transaction execute successfully",
-      "Sql_info": [
+      "err_msg": "事务提交成功",
+      "items": [
         {
           "id": 1,
           "name": "111",
           "sql": "INSERT INTO SQL_EXECUTOR.user (user_name, password, create_time, update_time, `describe`) VALUES ('qwer', 'qewqwer', '2024-04-27 13:52:02', '2024-04-27 13:52:18', 'ewqreqwwer')",
+          "err_msg": "该SQL执行成功，等待提交",
           "count": 1
         },
         {
           "id": 2,
           "name": "222",
           "sql": "INSERT INTO SQL_EXECUTOR.user (user_name, password, create_time, update_time, `describe`) VALUES ('qwer', 'qewqwer', '2024-04-27 13:52:02', '2024-04-27 13:52:18', 'ewqreqwwer')",
+          "err_msg": "该SQL执行成功，等待提交",
           "count": 1
         }
-      ]
+      ],
+      "timeout": 5
     }
   ],
   "count": 1,
-  "msg": ""
+  "err_msg": "所有都任务执行成功"
 }
 ```
 
@@ -740,80 +371,45 @@ curl --location --request POST 'http://localhost:8080/sql_executor/Modify' \
 
 返回结果：
 
-```json
-curl --location --request POST 'http://localhost:8080/sql_executor/Modify' \
---header 'User-Agent: Apifox/1.0.0 (https://apifox.com)' \
---header 'Content-Type: application/json' \
---header 'Accept: */*' \
---header 'Host: localhost:8080' \
---header 'Connection: keep-alive' \
---data-raw '{
-  "transactions": [
+```bash
+{
+  "code": 2,
+  "items": [
     {
       "id": 1,
+      "retry": 1,
+      "count": 3,
       "name": "first",
-      "sqls": [
+      "err_msg": "事务提交成功",
+      "items": [
         {
           "id": 1,
           "name": "first111",
-          "sql": "INSERT INTO SQL_EXECUTOR.user (user_name, password, create_time, update_time, `describe`) VALUES ('\''qwer'\'', '\''qewqwer'\'', '\''2024-04-27 13:52:02'\'', '\''2024-04-27 13:52:18'\'', '\''ewqreqwwer'\'')"
+          "sql": "INSERT INTO SQL_EXECUTOR.user (user_name, password, create_time, update_time, `describe`) VALUES ('qwer', 'qewqwer', '2024-04-27 13:52:02', '2024-04-27 13:52:18', 'ewqreqwwer')",
+          "err_msg": "该SQL执行成功，等待提交",
+          "count": 1
         },
         {
           "id": 2,
           "name": "second222",
-          "sql": "INSERT INTO SQL_EXECUTOR.user (user_name, password, create_time, update_time, `describe`) VALUES ('\''qwer'\'', '\''qewqwer'\'', '\''2024-04-27 13:52:02'\'', '\''2024-04-27 13:52:18'\'', '\''ewqreqwwer'\'')"
+          "sql": "INSERT INTO SQL_EXECUTOR.user (user_name, password, create_time, update_time, `describe`) VALUES ('qwer', 'qewqwer', '2024-04-27 13:52:02', '2024-04-27 13:52:18', 'ewqreqwwer')",
+          "err_msg": "该SQL执行成功，等待提交",
+          "count": 1
         },
         {
           "id": 3,
           "name": "third333",
-          "sql": "INSERT INTO SQL_EXECUTOR.user (user_name, password, create_time, update_time, `describe`) VALUES ('\''qwer'\'', '\''qewqwer'\'', '\''2024-04-27 13:52:02'\'', '\''2024-04-27 13:52:18'\'', '\''ewqreqwwer'\'')"
+          "sql": "INSERT INTO SQL_EXECUTOR.user (user_name, password, create_time, update_time, `describe`) VALUES ('qwer', 'qewqwer', '2024-04-27 13:52:02', '2024-04-27 13:52:18', 'ewqreqwwer')",
+          "err_msg": "该SQL执行成功，等待提交",
+          "count": 1
         }
-      ]
-    },
-        {
-      "id": 2,
-      "name": "second",
-      "sqls": [
-        {
-          "id": 1,
-          "name": "second222",
-          "sql": "INSERT INTO user (user_name, password, create_time, update_time, `describe`) VALUES ('\''qwer'\'', '\''qewqwer'\'', '\''2024-04-27 13:52:02'\'', '\''2024-04-27 13:52:18'\'', '\''ewqreqwwer'\'')"
-        },
-        {
-          "id": 2,
-          "name": "second333",
-          "sql": "INSERT INTO SQL_EXECUTOR.user (user_name, password, create_time, update_time, `describe`) VALUES ('\''qwer'\'', '\''qewqwer'\'', '\''2024-04-27 13:52:02'\'', '\''2024-04-27 13:52:18'\'', '\''ewqreqwwer'\'')"
-        },
-        {
-          "id": 3,
-          "name": "second111",
-          "sql": "INSERT INTO SQL_EXECUTOR.user (user_name, password, create_time, update_time, `describe`) VALUES ('\''qwer'\'', '\''qewqwer'\'', '\''2024-04-27 13:52:02'\'', '\''2024-04-27 13:52:18'\'', '\''ewqreqwwer'\'')"
-        }
-      ]
-    },
-        {
-      "id": 3,
-      "name": "third",
-      "sqls": [
-        {
-          "id": 1,
-          "name": "third111",
-          "sql": "INSERT INTO SQL_EXECUTOR.user (user_name, password, create_time, update_time, `describe`) VALUES ('\''qwer'\'', '\''qewqwer'\'', '\''2024-04-27 13:52:02'\'', '\''2024-04-27 13:52:18'\'', '\''ewqreqwwer'\'')"
-        },
-        {
-          "id": 2,
-          "name": "third222",
-          "sql": "INSERT INTO SQL_EXECUTOR.user (user_name, password, create_time, update_time, `describe`) VALUES ('\''qwer'\'', '\''qewqwer'\'', '\''2024-04-27 13:52:02'\'', '\''2024-04-27 13:52:18'\'', '\''ewqreqwwer'\'')"
-        },
-        {
-          "id": 3,
-          "name": "third333",
-          "sql": "INSERT INTO user (user_name, password, create_time, update_time, `describe`) VALUES ('\''qwer'\'', '\''qewqwer'\'', '\''2024-04-27 13:52:02'\'', '\''2024-04-27 13:52:18'\'', '\''ewqreqwwer'\'')"
-        }
-      ]
+      ],
+      "timeout": 5
     }
-  ]
-}'
+  ],
+  "count": 3,
+  "err_msg": "所有都任务执行成功"
+}
 ```
 
 4. 修改接口SQL合法性校验1
@@ -845,6 +441,31 @@ curl --location --request POST 'http://localhost:8080/sql_executor/Modify' \
   ]
 
 }'
+```
+
+结果：
+
+```bash
+{
+  "code": 4,
+  "items": [
+    {
+      "id": 1,
+      "count": 1,
+      "err_msg": "事务没有输入SQL或输入的SQL中有语法错误",
+      "items": [
+        {
+          "id": 1,
+          "name": "111",
+          "sql": " INTO SQL_EXECUTOR.user (user_name, password, create_time, update_time, `describe`) VALUES ('qwer', 'qewqwer', '2024-04-27 13:52:02', '2024-04-27 13:52:18', 'ewqreqwwer')",
+          "err_msg": "syntax error at position 6 near 'into'"
+        }
+      ]
+    }
+  ],
+  "count": 1,
+  "err_msg": "事务没有输入SQL或输入的SQL中有语法错误"
+}
 ```
 
 5. 修改接口SQL合法性校验2
@@ -884,24 +505,30 @@ curl --location --request POST 'http://localhost:8080/sql_executor/Modify' \
 
 ```json
 {
-  "code": 3,
-  "err_msg": "syntax error hava exist in these sqls",
-  "count": 1,
+  "code": 4,
   "items": [
     {
       "id": 1,
-      "count": 1,
-      "err_msg": "Syntax error has exist in the Transaction sql",
-      "Sql_info": [
+      "count": 2,
+      "err_msg": "事务没有输入SQL或输入的SQL中有语法错误",
+      "items": [
         {
           "id": 1,
           "name": "111",
           "sql": " INTO SQL_EXECUTOR.user (user_name, password, create_time, update_time, `describe`) VALUES ('qwer', 'qewqwer', '2024-04-27 13:52:02', '2024-04-27 13:52:18', 'ewqreqwwer')",
           "err_msg": "syntax error at position 6 near 'into'"
+        },
+        {
+          "id": 2,
+          "name": "222",
+          "sql": " INTO SQL_EXECUTOR.user (user_name, password, create_time, update_time, `describe`) VALUES ('qwer', 'qewqwer', '2024-04-27 13:52:02', '2024-04-27 13:52:18', 'ewqreqwwer')",
+          "err_msg": "syntax error at position 6 near 'into'"
         }
       ]
     }
-  ]
+  ],
+  "count": 1,
+  "err_msg": "事务没有输入SQL或输入的SQL中有语法错误"
 }
 ```
 
@@ -1008,15 +635,13 @@ curl --location --request POST 'http://localhost:8080/sql_executor/Modify' \
 
 ```json
 {
-  "code": 3,
-  "err_msg": "syntax error hava exist in these sqls",
-  "count": 4,
+  "code": 4,
   "items": [
     {
       "id": 1,
       "count": 1,
-      "err_msg": "Syntax error has exist in the Transaction sql",
-      "Sql_info": [
+      "err_msg": "事务没有输入SQL或输入的SQL中有语法错误",
+      "items": [
         {
           "id": 1,
           "name": "first111",
@@ -1028,8 +653,8 @@ curl --location --request POST 'http://localhost:8080/sql_executor/Modify' \
     {
       "id": 2,
       "count": 1,
-      "err_msg": "Syntax error has exist in the Transaction sql",
-      "Sql_info": [
+      "err_msg": "事务没有输入SQL或输入的SQL中有语法错误",
+      "items": [
         {
           "id": 1,
           "name": "second222",
@@ -1041,8 +666,8 @@ curl --location --request POST 'http://localhost:8080/sql_executor/Modify' \
     {
       "id": 3,
       "count": 2,
-      "err_msg": "Syntax error has exist in the Transaction sql",
-      "Sql_info": [
+      "err_msg": "事务没有输入SQL或输入的SQL中有语法错误",
+      "items": [
         {
           "id": 1,
           "name": "third111",
@@ -1060,8 +685,8 @@ curl --location --request POST 'http://localhost:8080/sql_executor/Modify' \
     {
       "id": 4,
       "count": 3,
-      "err_msg": "Syntax error has exist in the Transaction sql",
-      "Sql_info": [
+      "err_msg": "事务没有输入SQL或输入的SQL中有语法错误",
+      "items": [
         {
           "id": 1,
           "name": "4th",
@@ -1082,6 +707,29 @@ curl --location --request POST 'http://localhost:8080/sql_executor/Modify' \
         }
       ]
     }
-  ]
+  ],
+  "count": 4,
+  "err_msg": "事务没有输入SQL或输入的SQL中有语法错误"
+}
+```
+
+7. 修改接口传入参数合法性校验
+
+```bash
+curl --location --request POST 'http://localhost:8080/sql_executor/Modify' \
+--header 'User-Agent: Apifox/1.0.0 (https://apifox.com)' \
+--header 'Content-Type: application/json' \
+--header 'Accept: */*' \
+--header 'Host: localhost:8080' \
+--header 'Connection: keep-alive' \
+--data-raw '[]'
+```
+
+结果：
+
+```json
+{
+  "code": 1,
+  "err_msg": "json: cannot unmarshal array into Go value of type utils.RequestBody"
 }
 ```
