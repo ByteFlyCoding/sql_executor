@@ -17,6 +17,57 @@
 7. 程序中要求包含中文注释和单元测试；
 8. 不需要写前端界面，仅有接口即可。
 
+## 实现原理
+
+sql_executor要求程序接收到退出信号时，需要等待当前执行中的任务都执行完毕后再退出。因此我们可以利用main()
+程序退出后子协程也会退出的特性，新建一个协程运行beego
+server，在程序接收到退出信号后，用sync.WaitGroup阻塞住main函数，避免main()
+退出。每当执行一个新任务 sync.WaitGroup 计数器加一，任务完成时计数器减一，当所有任务执行完成，sync.WaitGroup
+计数器减少为零则main()退出，beego服务也随之退出。
+
+以下为等效伪代码
+
+```go
+package main
+
+import "sync"
+
+// import (......
+//      .....)
+
+// 每调用一次接口执行任务 wg 计数器就加一，每一个任务完成时 wg 计数器就减一
+var wg sync.WaitGroup
+
+func main() {
+
+  // 连接数据库等初始化操作.......
+
+  go beego.Run()
+
+  stop := make(chan os.Signal, 1)
+  // 监听发送给该程序的退出信号，若接收到退出信号后传入到stop中
+  signal.Notify(stop, syscall.SIGHUP,
+    syscall.SIGINT,
+    syscall.SIGTERM,
+    syscall.SIGQUIT)
+
+  // 在程序接收退出信号前阻塞住main()
+  <-stop
+
+  // 在程序所有任务完成前阻塞住main()
+  wg.Wait()
+}
+
+```
+
+#### 查询接口时序图
+
+![img.png](img/img.png)
+
+#### 修改接口时序图
+
+![img.png](img/img1.png)
+
 ## 接口设计
 
 ### 查询接口
