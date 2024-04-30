@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"errors"
+	"strconv"
 	"sync"
 
 	"github.com/beego/beego/v2/core/logs"
@@ -22,9 +23,10 @@ func (c *SqlExecutorController) Query() {
 
 	var msg string
 	// 获取查询允许的重试次数
-	retryCount, err := c.GetInt("retry")
-	if err != nil {
-		msg = "retryCount input is abnormal"
+	retryCountStr := c.GetString("retry")
+	retryCount, err := strconv.Atoi(retryCountStr)
+	if err != nil && retryCountStr != "" {
+		msg = "最大允许重试次数retry输入不正确"
 	}
 	// 若接收到重试次数 count < 0 则默认不重试 即只执行一次
 	if retryCount <= 0 {
@@ -49,7 +51,7 @@ func (c *SqlExecutorController) Query() {
 	}
 
 	// 生成查询接口返回对象
-	c.Data["json"] = utils.ReturnQuerySuccess(sql, msg, items, count, retryCount)
+	c.Data["json"] = utils.ReturnQuerySuccess(sql, "查询成功", items, count, retryCount)
 
 	_ = c.ServeJSON()
 }

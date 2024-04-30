@@ -53,12 +53,12 @@ func (e *Executor) Modify(t *utils.TransactionParamInfo, runner *utils.Runner) e
 	runner.Retry++
 
 	if t.Timeout <= 0 {
-		runner.Timeout = 5
+		runner.Timeout = 300
 	} else {
 		runner.Timeout = t.Timeout
 	}
 
-	ctx, cancel := context.WithTimeout(context.Background(), runner.Timeout*time.Second) // 设置超时, 默认为5s
+	ctx, cancel := context.WithTimeout(context.Background(), runner.Timeout*time.Second) // 设置超时, 默认为300s
 	defer cancel()                                                                       // 确保在函数退出时取消上下文
 
 	// 开启事务

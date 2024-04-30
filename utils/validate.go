@@ -47,22 +47,6 @@ func ModifySqlValidate(sql string) error {
 
 }
 
-// ReturnModifyParamError 返回查询接口执行任务异常信息
-func ReturnModifyParamError(code int, err interface{}) *ModifyParamError {
-
-	var msg string
-	switch err.(type) {
-	case string:
-		msg, _ = err.(string)
-	default:
-		msg = fmt.Sprintf("%s", err)
-	}
-
-	jsonData := ModifyParamError{Code: code, ErrMsg: msg}
-
-	return &jsonData
-}
-
 // TransactionsValidate 修改接口输入参数校验
 func TransactionsValidate(req *RequestBody) (*ModifyParamErrorJson, error) {
 
@@ -89,7 +73,7 @@ func TransactionsValidate(req *RequestBody) (*ModifyParamErrorJson, error) {
 		if len(trsInfo.Sqls) == 0 {
 			// 该事务中的SQL列表为空，直接返回参数错误
 			sqlErrorInfo = append(sqlErrorInfo, SqlErrorInfo{
-				ErrMsg: fmt.Sprintf("事务%v中没有输入任何sql", *trsInfo),
+				ErrMsg: "事务中没有输入任何sql",
 			})
 			logs.Error("该事务%v中没有输入任何sql语句", *trsInfo)
 		}
@@ -109,6 +93,8 @@ func TransactionsValidate(req *RequestBody) (*ModifyParamErrorJson, error) {
 			// 该事务存在异常，添加进返回列表
 			rsp.Items = append(rsp.Items, TransactionParamError{
 				ID:           trsInfo.ID,
+				Timeout:      trsInfo.Timeout,
+				Name:         trsInfo.Name,
 				ErrMsg:       "事务没有输入SQL或输入的SQL中有语法错误",
 				Count:        int64(len(sqlErrorInfo)),
 				SqlErrorInfo: sqlErrorInfo,

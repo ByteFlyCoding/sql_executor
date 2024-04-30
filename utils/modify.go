@@ -1,6 +1,9 @@
 package utils
 
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
 // RequestBody 用于反序列化Modify接口请求的body
 type RequestBody struct {
@@ -81,4 +84,20 @@ type SqlExecInfo struct {
 type ModifyParamError struct {
 	Code   int    `json:"code"`    // 业务状态码
 	ErrMsg string `json:"err_msg"` // 异常信息
+}
+
+// ReturnModifyParamError 返回查询接口执行任务异常信息
+func ReturnModifyParamError(code int, err interface{}) *ModifyParamError {
+
+	var msg string
+	switch err.(type) {
+	case string:
+		msg, _ = err.(string)
+	default:
+		msg = fmt.Sprintf("%s", err)
+	}
+
+	jsonData := ModifyParamError{Code: code, ErrMsg: msg}
+
+	return &jsonData
 }
