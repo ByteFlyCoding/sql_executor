@@ -64,7 +64,7 @@ type ModifyJson struct {
 type Runner struct {
 	ID          int           `json:"id,omitempty"`      // 事务ID
 	Retry       int           `json:"retry"`             // 重试次数
-	Count       int64         `json:"count"`             // 该事务中执行的SQL数量
+	Count       int           `json:"count"`             // 该事务中执行的SQL数量
 	Name        string        `json:"name,omitempty"`    // 事务名称
 	ErrMsg      string        `json:"err_msg,omitempty"` // 事务运行消息
 	SqlExecInfo []SqlExecInfo `json:"items"`             // 该事务中的SQL运行情况列表

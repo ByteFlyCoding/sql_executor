@@ -121,10 +121,15 @@ func modifyTaskRunners(task *utils.RequestBody, model *models.Executor) *utils.M
 
 		err := runner(t, taskInfo)
 		// 若数据库执行任务返回错误，则根据设置的允许重试次数重试任务
-		for err != nil && !errors.Is(err, models.ERROUTRETRYTIME) {
+		for err != nil {
+			if errors.Is(err, models.ERROUTRETRYTIME) {
+				// 超过重试次数
+				res.Code = utils.FAILMODIFYEXIST
+				res.ErrMsg = err.Error()
+				break
+			}
+
 			err = runner(t, taskInfo)
-			res.Code = utils.FAILMODIFYEXIST
-			res.ErrMsg = "存在未执行成功的子任务，请排查，" + err.Error()
 		}
 
 		m.Lock() // 加锁保证并发安全，后期可以看看能不能改成原子操作
@@ -137,7 +142,9 @@ func modifyTaskRunners(task *utils.RequestBody, model *models.Executor) *utils.M
 		result := new(utils.Runner)
 		result.ID = t.ID
 		result.Name = t.Name
-		result.Count = int64(len(t.Sqls))
+		result.Count = len(t.Sqls)
+		result.Timeout = t.Timeout
+		result.Retry = -1
 
 		wg.Add(1)                 // 启动子任务执行逻辑前 WaitGroup 计数器递减 1 确保子任务完成前 modifyTaskRunners 被阻塞
 		go runnerLogic(t, result) // 启动子任务调用逻辑

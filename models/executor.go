@@ -11,7 +11,7 @@ import (
 	"sql_executor/utils"
 )
 
-var ERROUTRETRYTIME = errors.New("超过最大重试次数")
+var ERROUTRETRYTIME = errors.New("超过最大重试次数，子任务失败")
 
 type Executor struct {
 	orm.Ormer
@@ -40,17 +40,20 @@ func (e *Executor) Query(sql string, retry int) (int64, int, []orm.Params, error
 		}
 	}
 
-	return count, i, result, fmt.Errorf("超过最大允许重试次数：%v 查询失败", retry)
+	return count, i - 1, result, fmt.Errorf("超过最大允许重试次数：%v 查询失败", retry)
 }
 
 // Modify 执行传入的事务
 func (e *Executor) Modify(t *utils.TransactionParamInfo, runner *utils.Runner) error {
 
 	// 超过最大允许重试次数，返回异常
-	if t.Retry+1 < runner.Retry {
+	if t.Retry < runner.Retry {
 		return ERROUTRETRYTIME
 	}
 	runner.Retry++
+
+	// 若重试则清空sql执行历史信息表，也可以不清空，不清空的话可以看到完整的SQL执行记录，但是单元测试工作量会比较大
+	runner.SqlExecInfo = make([]utils.SqlExecInfo, 0)
 
 	if t.Timeout <= 0 {
 		runner.Timeout = 300
@@ -64,7 +67,7 @@ func (e *Executor) Modify(t *utils.TransactionParamInfo, runner *utils.Runner) e
 	// 开启事务
 	tx, err := e.BeginWithCtx(ctx)
 	if err != nil {
-		runner.ErrMsg = err.Error()
+		runner.ErrMsg = "开启事务失败，" + err.Error()
 		return err
 	}
 
@@ -77,14 +80,16 @@ func (e *Executor) Modify(t *utils.TransactionParamInfo, runner *utils.Runner) e
 		}
 
 		// 执行同一个事务中的INSERT、DELETE或者UPDATE语句
-		result, err := e.Raw(sqlInfo.Sql).Exec()
+		result, err := tx.Raw(sqlInfo.Sql).Exec()
 		if err != nil {
 			// 若有SQL执行出错则退出
 			errRollback := tx.Rollback()
 			if errRollback != nil {
-				runner.ErrMsg = "事务回滚失败，" + err.Error()
+				runner.ErrMsg = "事务回滚失败，等待自动回滚：" + errRollback.Error()
+			} else {
+				runner.ErrMsg = "事务执行失败，已回滚："
 			}
-			execInfo.ErrMsg = "事务执行失败，已经回滚，" + err.Error()
+			execInfo.ErrMsg = "SQL执行失败，等待回滚" + err.Error()
 			runner.SqlExecInfo = append(runner.SqlExecInfo, execInfo)
 			return err
 		}
@@ -92,15 +97,18 @@ func (e *Executor) Modify(t *utils.TransactionParamInfo, runner *utils.Runner) e
 			count, err := result.RowsAffected()
 			if err != nil {
 				// 这里不一定是错误，可能是没有行被修改（noLows），由不同的数据库驱动实现决定
-				execInfo.ErrMsg = err.Error()
+				execInfo.ErrMsg = "出现空行错误" + err.Error()
 				runner.SqlExecInfo = append(runner.SqlExecInfo, execInfo)
 			}
 			if count > 0 {
 				// 记录该 SQL 语句执行后生效的记录数、执行成功消息
 				execInfo.Count = count
-				execInfo.ErrMsg = "该SQL执行成功，等待提交"
+				execInfo.ErrMsg = "该SQL执行成功，等待事务提交"
 				runner.SqlExecInfo = append(runner.SqlExecInfo, execInfo)
 			}
+		} else {
+			execInfo.ErrMsg = "该SQL执行成功，但是没有执行结果"
+			runner.SqlExecInfo = append(runner.SqlExecInfo, execInfo)
 		}
 	}
 
@@ -108,7 +116,7 @@ func (e *Executor) Modify(t *utils.TransactionParamInfo, runner *utils.Runner) e
 	err = tx.Commit()
 	if err != nil {
 		// 事务提交失败 输出日志
-		runner.ErrMsg = "该事务提交失败" + err.Error()
+		runner.ErrMsg = "该事务提交失败，已回滚：" + err.Error()
 		logs.Error(err)
 		return err
 	}
